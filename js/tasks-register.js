@@ -313,7 +313,7 @@
                 '<li>при вводе пароля (событие <code>input</code>): если длина пароля <code>8</code> и больше — добавь первым трём полоскам ' +
                 '<code>.bar</code> класс <code>bar-medium</code>, иначе убери его у всех</li></ul>' +
                 '<p>Подсказка: <code>bars.forEach(function (bar, index) { ... })</code> — <code>index</code> это номер полоски: 0, 1, 2, 3.</p>',
-            hint: ['addEventListener', 'passwordInput.type', 'passwordInput.value.length', 'forEach(function (bar, index) ...)', 'classList.add / remove'],
+            hint: ["addEventListener('click', ...)", "addEventListener('input', ...)", 'if / else', 'passwordInput.type', 'textContent', 'passwordInput.value.length', 'forEach(function (bar, index) ...)', 'classList.add / remove'],
             start: {
                 html: passwordField,
                 css: T.fieldCss + '\n' + mutedCss + '\n' + strengthCss + '\n' + barColorsCss + '\n.eye-btn {\n    cursor: pointer;\n}\n',
@@ -367,7 +367,7 @@
                 '<li>если пароль короче 8 знаков — «Пароль должен быть не короче 8 знаков», покажи, <code>return</code></li>' +
                 '<li>если галочка не стоит (<code>!form.elements.agree.checked</code>) — «Поставь галочку согласия», покажи, <code>return</code></li>' +
                 '<li>иначе сохрани имя: <code>localStorage.setItem(\'userName\', name)</code> и перейди: <code>location.href = form.action</code></li></ul>',
-            hint: ['event.preventDefault()', 'form.elements.name.value.trim()', '.length < 8', '.checked', 'textContent', 'localStorage.setItem'],
+            hint: ["addEventListener('submit', ...)", 'event.preventDefault()', 'form.elements.name.value.trim()', '.length < 8', '!form.elements.agree.checked', 'return', 'localStorage.setItem', 'location.href = form.action'],
             before: function () { localStorage.removeItem('userName'); },
             after: function () { localStorage.removeItem('userName'); },
             start: {

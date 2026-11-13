@@ -114,7 +114,7 @@
                 'скругление <code>12px</code>, текст по центру, отступы <code>10px 0</code>, снаружи <code>14px 0</code></li>' +
                 '<li><code>.stats b</code>: отдельной строкой (<code>display: block</code>), размер <code>20px</code></li>' +
                 '<li><code>.btn-wide</code>: кнопка растягивается (<code>flex: 1</code>)</li></ul>',
-            hint: ['<b>', '<small>', 'display: grid', 'grid-template-columns: repeat(3, 1fr)', 'text-align: center', 'display: block', 'flex: 1'],
+            hint: ['<div>', '<b>', '<small>', 'display: grid', 'grid-template-columns: repeat(3, 1fr)', 'text-align: center', 'display: block', 'flex: 1'],
             start: {
                 html: '<section class="card">\n    <div class="stats">\n        <!-- три блока с числами -->\n\n    </div>\n' +
                     '    <div class="row">\n        <button class="btn btn-wide open-edit"><div class="icon">edit</div> Редактировать профиль</button>\n' +
@@ -445,7 +445,7 @@
                 '<code>toggle.dataset.off</code>, если включили — из <code>toggle.dataset.on</code></li>' +
                 '<li>кнопка «Тоже иду» (<code>.go-btn</code>): при клике переключай класс <code>btn-accent</code></li></ul>' +
                 '<p>Подсказка: подпись в той же строке — <code>toggle.parentElement.querySelector(\'.setting-text\')</code>.</p>',
-            hint: ['querySelectorAll(...).forEach', 'classList.toggle(\'off\')', 'dataset.on / dataset.off', 'parentElement', 'textContent'],
+            hint: ['querySelectorAll(...).forEach', "addEventListener('click', ...)", "classList.toggle('off')", 'if / else', 'dataset.on / dataset.off', 'parentElement', 'textContent'],
             start: {
                 html: settingsHtml + '\n\n<button class="btn btn-accent go-btn">Тоже иду</button>',
                 css: cardCss + '\n' + listItemCss + '\n' + switchCss + '\n' + switchOffCss + '\n' + T.btnCss,

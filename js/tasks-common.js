@@ -16,6 +16,62 @@
 
 window.QuestTasks = {};
 
+// ---------- Полная подсказка задачи ----------
+// к командам из task.hint добавляются все CSS-свойства, которые есть в эталоне,
+// но которых нет в стартовом коде (их ученик пишет сам) и ещё нет в подсказке
+QuestTasks.fullHints = function (task) {
+    const hints = task.hint.slice();
+    const answerCss = (task.answer && task.answer.css) || '';
+    const startCss = (task.start && task.start.css) || '';
+
+    function props(css) {
+        const clean = css.replace(/\/\*[\s\S]*?\*\//g, '');
+        return clean.match(/(?:^|[\s;{])([a-z-]+)(?=\s*:)/g) || [];
+    }
+
+    props(answerCss).forEach(function (raw) {
+        const prop = raw.replace(/^[\s;{]/, '');
+        const word = new RegExp('(^|[^\\w-])' + prop + '([^\\w-]|$)');
+        const alreadyInStart = new RegExp('(^|[^\\w-])' + prop + '\\s*:').test(startCss);
+        const alreadyInHints = hints.some(function (h) { return word.test(h); });
+        if (!alreadyInStart && !alreadyInHints) hints.push(prop);
+    });
+    return hints;
+};
+
+// ---------- Ключ команды: что считается «той же самой» командой ----------
+// "padding: 14px 0" и "padding" — одна команда (числа неважны),
+// а "display: flex" и "display: grid" — разные (новое значение надо показать)
+QuestTasks.hintKey = function (hint) {
+    const text = hint.trim().toLowerCase();
+    const m = text.match(/^([a-z-]+)\s*:\s*(.+?);?$/);
+    if (!m) return text;
+    const value = m[2].trim();
+    if (/\d|\.\.\./.test(value)) return m[1];
+    return m[1] + ':' + value;
+};
+
+// ---------- Подсказка, которую видит ученик ----------
+// только команды, которых не было в подсказках прошлых задач этой страницы
+QuestTasks.visibleHints = function (tasks, index) {
+    const seen = {};      // ключи уже показанных команд
+    const seenProps = {}; // CSS-свойства, которые уже встречались с любым значением
+    for (let i = 0; i < index; i++) {
+        QuestTasks.fullHints(tasks[i]).forEach(function (h) {
+            const key = QuestTasks.hintKey(h);
+            seen[key] = true;
+            seenProps[key.split(':')[0]] = true;
+        });
+    }
+    return QuestTasks.fullHints(tasks[index]).filter(function (h) {
+        const key = QuestTasks.hintKey(h);
+        if (seen[key]) return false;
+        // голое название свойства («display») знакомо, если свойство уже было
+        if (key.indexOf(':') < 0 && seenProps[key]) return false;
+        return true;
+    });
+};
+
 // ---------- 1. Каркас и базовые стили (у всех одинаковая) ----------
 QuestTasks.base = function () {
     return {
@@ -63,7 +119,7 @@ QuestTasks.headerBack = function (href, label, pageName) {
             '(' + pageName + '), а в ссылку — иконку <code>&lt;div class="icon"&gt;arrow_back&lt;/div&gt;</code></li>' +
             '<li>Шапка в строку: <code>display: flex</code>, по центру по вертикали, промежуток <code>12px</code></li>' +
             '<li>Текст размером <code>16px</code>, жирность <code>600</code>, отступы сверху и снизу <code>14px</code></li></ul>',
-        hint: ['<a href="...">', 'display: flex', 'align-items: center', 'gap', 'font-weight', 'padding: 14px 0'],
+        hint: ['<a href="...">', '<div class="icon">arrow_back</div>', 'display: flex', 'align-items: center', 'gap', 'font-size', 'font-weight', 'padding: 14px 0'],
         start: {
             html: '<header class="header-back">\n    <!-- сюда ссылку со стрелкой -->\n\n    ' + label + '\n</header>',
             css: '.header-back {\n    \n}\n',

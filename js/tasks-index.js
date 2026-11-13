@@ -385,7 +385,7 @@
                 '<li>пройди по всем событиям (<code>forEach</code>): если фильтр <code>all</code> или <code>event.dataset.type</code> ' +
                 'содержит фильтр (<code>.includes(...)</code>) — убери класс <code>hide</code>, иначе добавь</li>' +
                 '<li>посчитай видимые события и запиши в <code>.found-count</code> текст вида <code>3 найдено</code></li></ul>',
-            hint: ['querySelectorAll', 'forEach', 'classList.add / remove', 'button.dataset.filter', '.includes(...)', 'textContent'],
+            hint: ['querySelectorAll', 'forEach', "addEventListener('click', ...)", 'classList.add / remove', 'button.dataset.filter', 'event.dataset.type', 'if / else', '||', '.includes(...)', 'textContent'],
             start: {
                 html: filtersHtml + '\n\n<p class="muted found-count">5 найдено</p>\n\n' + allEvents,
                 css: filtersCss + '\n' + readyCss,
@@ -491,7 +491,7 @@
                 '<li>«Поделиться» (<code>.share-btn</code>): скопируй адрес страницы ' +
                 '<code>navigator.clipboard.writeText(location.href)</code> и покажи подсказку <code>.toast</code> (убери <code>hide</code>). ' +
                 'Через 2 секунды спрячь её снова: <code>setTimeout(function () { ... }, 2000)</code></li></ul>',
-            hint: ['querySelectorAll(...).forEach', 'classList.toggle(\'btn-accent\')', 'navigator.clipboard.writeText', 'setTimeout'],
+            hint: ['querySelectorAll(...).forEach', "classList.toggle('btn-accent')", 'navigator.clipboard.writeText', 'location.href', 'setTimeout'],
             start: {
                 html: allEvents + '\n\n<div class="toast hide">Ссылка скопирована</div>',
                 css: readyCss + '\n.toast {\n    position: fixed;\n    bottom: 20px;\n    left: 0;\n    right: 0;\n    width: 220px;\n    margin: 0 auto;\n' +
@@ -540,7 +540,7 @@
                 '<li>кнопки <code>.close-modal</code> закрывают своё окно: <code>button.closest(\'dialog\').close()</code></li>' +
                 '<li>отправка <code>.suggest-form</code>: отмени отправку; если название пустое — покажи <code>.error</code>, ' +
                 'иначе спрячь форму и покажи <code>.thanks</code></li></ul>',
-            hint: ['showModal()', 'close()', 'closest(\'dialog\')', 'event.preventDefault()', 'form.elements.title.value', 'classList'],
+            hint: ['showModal()', 'close()', "closest('dialog')", "addEventListener('submit', ...)", 'event.preventDefault()', 'form.elements.title.value', 'return', 'classList'],
             start: {
                 html: '<a href="#" class="link guide-link">Смотреть гид ›</a>\n<button class="btn btn-accent open-suggest">Предложить событие</button>\n\n' +
                     '<dialog class="modal guide-modal">\n    <h2>12 мест без билетов</h2>\n    <ul>\n        <li>Любинский проспект</li>\n' +

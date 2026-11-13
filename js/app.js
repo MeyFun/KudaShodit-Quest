@@ -196,12 +196,20 @@
 
         // подсказка: нужные команды
         const hints = $('.hints');
-        hints.innerHTML = '<span class="label">Понадобится:</span>';
-        task.hint.forEach(function (h) {
+        // в подсказке только новые команды — знакомые ученик вспоминает сам
+        const fresh = QuestTasks.visibleHints(tasks, i);
+        hints.innerHTML = '<span class="label">Новые команды:</span>';
+        fresh.forEach(function (h) {
             const code = document.createElement('code');
             code.textContent = h;
             hints.appendChild(code);
         });
+        if (fresh.length === 0) {
+            const note = document.createElement('span');
+            note.className = 'label';
+            note.textContent = 'новых нет — все команды ты уже знаешь';
+            hints.appendChild(note);
+        }
 
         // вкладки редактора только для нужных языков
         const kinds = taskKinds(task);

@@ -321,7 +321,7 @@
                 '<li>если логин или пароль пустые (не забудь <code>.trim()</code>) — покажи ошибку: убери у <code>.error</code> класс <code>hide</code>, ' +
                 'и закончи функцию (<code>return</code>)</li>' +
                 '<li>если всё заполнено — переходи в профиль: <code>location.href = form.action;</code></li></ul>',
-            hint: ['addEventListener(\'submit\', ...)', 'event.preventDefault()', '.value.trim() === \'\'', '||', 'classList.remove(\'hide\')', 'return'],
+            hint: ["addEventListener('submit', ...)", 'event.preventDefault()', ".value.trim() === ''", '||', "classList.remove('hide')", 'return', 'location.href = form.action'],
             start: {
                 html: '<form class="card login-form" action="../profile/profile.html">\n' + loginField.replace(/^/gm, '    ') + '\n' +
                     passwordField.replace(/^/gm, '    ') + '\n    <p class="error hide">Заполни телефон или email и пароль</p>\n' +
@@ -360,7 +360,7 @@
                 '<li>клик по «Быстрый ввод» (<code>.quick-input</code>): впиши в поле логина <code>\'+7 \'</code></li>' +
                 '<li>клик по «Забыли пароль?» (<code>.forgot-link</code>): отмени переход по ссылке (<code>event.preventDefault()</code>). ' +
                 'Если логин пустой — покажи <code>.error</code>, иначе — покажи <code>.forgot-text</code> (убери класс <code>hide</code>)</li></ul>',
-            hint: ['addEventListener(\'click\', ...)', 'loginInput.value = ...', 'event.preventDefault()', 'if / else', 'classList.remove(\'hide\')'],
+            hint: ['document.querySelector(...)', "addEventListener('click', ...)", 'loginInput.value = ...', 'event.preventDefault()', 'if / else', "classList.remove('hide')"],
             start: {
                 html: '<form class="card login-form">\n' + loginField.replace(/^/gm, '    ') + '\n' + passwordField.replace(/^/gm, '    ') +
                     '\n    <p class="error hide">Сначала введи телефон или email</p>\n' +
