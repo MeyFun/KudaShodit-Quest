@@ -89,6 +89,15 @@
                     indentUnit: 4,
                     tabSize: 4,
                     autoCloseBrackets: true,
+                    // в HTML после <p> сразу дописывается </p>
+                    // (для <br>, <img>, <input> и других одиночных тегов — нет)
+                    autoCloseTags: kind === 'html' ? {
+                        whenOpening: true,
+                        whenClosing: true,
+                        // на отдельные строки раскрываются только блоки-контейнеры,
+                        // а <p>, <h1>, <b>, <a> закрываются в той же строке
+                        indentTags: ['div', 'section', 'header', 'nav', 'main', 'footer', 'form', 'ul', 'article', 'dialog'],
+                    } : false,
                     lineWrapping: true,
                 });
                 cm.on('change', onCodeChange);
