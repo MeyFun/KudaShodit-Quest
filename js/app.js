@@ -488,10 +488,21 @@
         $('.answer-dialog').showModal();
     });
 
-    $('.accept-task').addEventListener('click', function () {
+    // эталон подставляется в редактор, но задача не засчитывается:
+    // засчитает только кнопка «Проверить», когда все проверки пройдут
+    $('.insert-answer').addEventListener('click', function () {
         if (!page) return;
-        if (!confirm('Засчитать задачу ' + (current + 1) + ' для ' + surname + '?')) return;
-        solve();
+        if (!confirm('Вставить эталонный код в задачу ' + (current + 1) + '? Код ученика в этой задаче заменится.')) return;
+        const task = tasks[current];
+        taskKinds(task).forEach(function (kind) {
+            const value = task.answer[kind] !== undefined ? task.answer[kind] : task.start[kind];
+            editors[kind].set(value);
+        });
+        progress.code[current] = currentCode();
+        saveProgress();
+        $('.checks').innerHTML = '';
+        $('.success').classList.add('hidden');
+        updatePreview();
     });
 
     $('.reset-progress').addEventListener('click', function () {
