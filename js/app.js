@@ -240,19 +240,36 @@
         return !!el && !!el.closest(NO_COPY);
     }
 
+    // задевает ли выделение условие или подсказки хотя бы частично
+    function selectionTouchesTask() {
+        const sel = document.getSelection();
+        if (!sel || sel.isCollapsed) return false;
+        // начало или конец выделения внутри условия
+        if (fromTaskText(sel.anchorNode) || fromTaskText(sel.focusNode)) return true;
+        // или выделение проходит через условие насквозь
+        return Array.from(document.querySelectorAll(NO_COPY)).some(function (el) {
+            return sel.containsNode(el, true);
+        });
+    }
+
     ['copy', 'cut'].forEach(function (type) {
         document.addEventListener(type, function (event) {
-            const sel = document.getSelection();
-            if (sel && (fromTaskText(sel.anchorNode) || fromTaskText(sel.focusNode))) {
+            if (selectionTouchesTask()) {
                 event.preventDefault();
+                document.getSelection().removeAllRanges();
             }
-        });
+        }, true);
     });
 
-    ['contextmenu', 'dragstart', 'selectstart'].forEach(function (type) {
+    // выделение, протянутое мышкой в условие, сразу снимается
+    document.addEventListener('selectionchange', function () {
+        if (selectionTouchesTask()) document.getSelection().removeAllRanges();
+    });
+
+    ['contextmenu', 'dragstart', 'selectstart', 'mousedown'].forEach(function (type) {
         document.addEventListener(type, function (event) {
             if (fromTaskText(event.target)) event.preventDefault();
-        });
+        }, true);
     });
 
     $('.reset-code').addEventListener('click', function () {

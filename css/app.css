@@ -301,8 +301,11 @@ body.teacher .teacher-only {
 
 /* Условие и подсказки нельзя выделить — команды ученик пишет сам */
 .task-head,
+.task-head *,
 .task-text,
-.hints {
+.task-text *,
+.hints,
+.hints * {
     user-select: none;
     -webkit-user-select: none;
 }
