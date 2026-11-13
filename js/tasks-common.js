@@ -149,7 +149,7 @@ QuestTasks.headerBack = function (href, label, pageName) {
 QuestTasks.mainHeader = function () {
     const html =
         '<header class="header">\n' +
-        '    <a href="../index/index.html" class="logo">\n' +
+        '    <a href="../afisha/afisha.html" class="logo">\n' +
         '        <div class="logo-icon"><div class="icon">local_activity</div></div>\n' +
         '        <div>\n' +
         '            <b class="logo-title">КУДА_СХОДИТЬ</b><br>\n' +

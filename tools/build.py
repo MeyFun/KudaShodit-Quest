@@ -5,7 +5,7 @@
 
 Якорь — строка файла (без отступов), с которой начинается блок задачи.
 "#2" после якоря — второе вхождение строки, "#last" — последнее.
-Комментарии прямо над якорем уходят в тот же блок.
+Комментарии прямо над якорем (если есть) уходят в тот же блок.
 Всё, что стоит до первого якоря, относится к блоку DEFAULT.
 """
 import base64
@@ -17,9 +17,9 @@ PAGES = {
     # ---------------- Вход (Ложников) ----------------
     "login": {
         "html": (1, {
-            "<!-- Шапка: стрелка назад на афишу -->": 2,
+            '<header class="header-back">': 2,
             '<div class="page-title">': 3,
-            "<!-- Форма входа: после отправки открывается профиль -->": 4,
+            '<form class="card login-form" action="../profile/profile.html">': 4,
             '<div class="field">#2': 5,
             '<p class="error hide">Заполни телефон или email и пароль</p>': 11,
             '<button type="submit" class="btn btn-accent btn-big">Войти <div class="icon">arrow_forward</div></button>': 6,
@@ -35,19 +35,19 @@ PAGES = {
             ".hide {": 11, ".forgot-text {": 12, ".quick-input,": 10,
         }),
         "js": (10, {
-            "// ---------- «Быстрый ввод»: подставляем начало номера ----------": 12,
-            "// ---------- Глазок: показать или скрыть пароль ----------": 10,
-            "// ---------- «Забыли пароль?» ----------": 12,
-            "// ---------- Проверка формы перед входом ----------": 11,
-            "// ---------- Вход через соцсети: сразу в профиль ----------": 12,
+            "document.querySelector('.quick-input').addEventListener('click', function () {": 12,
+            "eyeButton.addEventListener('click', function () {": 10,
+            "document.querySelector('.forgot-link').addEventListener('click', function (event) {": 12,
+            "form.addEventListener('submit', function (event) {": 11,
+            "document.querySelectorAll('.social-btn').forEach(function (button) {": 12,
         }),
     },
     # ---------------- Регистрация (Зяблов) ----------------
     "register": {
         "html": (1, {
-            "<!-- Шапка: стрелка назад ко входу -->": 2,
-            "<!-- Приветственный блок -->": 3,
-            "<!-- Форма регистрации: после отправки открывается профиль -->": 4,
+            '<header class="header-back">': 2,
+            '<section class="card">': 3,
+            '<form class="register-form" action="../profile/profile.html">': 4,
             '<div class="field">#2': 5,
             '<div class="field">#4': 6,
             '<div class="field">#5': 7,
@@ -63,24 +63,24 @@ PAGES = {
             ".hide {": 12, ".eye-btn {": 11, ".strength {": 6, ".bar-weak {": 11,
         }),
         "js": (11, {
-            "// ---------- Проверка формы ----------": 12,
+            "function showError(text) {": 12,
         }),
     },
     # ---------------- Афиша (Аракелян) ----------------
-    "index": {
+    "afisha": {
         "html": (1, {
             '<header class="header">': 2,
-            "<!-- Поле поиска: появляется по кнопке с лупой -->": 10,
-            "<!-- Заголовок страницы -->": 3,
-            "<!-- Фильтры -->": 4,
-            "<!-- Подборка выходных -->": 5,
-            "<!-- Главные события -->": 6,
+            '<input class="search-input hide" type="text" placeholder="Найти событие или место">': 10,
+            '<div class="page-title">': 3,
+            '<div class="filters">': 4,
+            '<section class="card promo">': 5,
+            '<h2 class="section-title">': 6,
             '<article class="card event" data-id="quiz" data-type="near quiz">': 7,
             '<p class="muted empty-text hide">Ничего не найдено. Попробуй другой фильтр.</p>': 9,
-            "<!-- Предложить событие -->": 8,
-            "<!-- Окно: гид по бесплатным местам -->": 12,
-            "<!-- Всплывающая подсказка -->": 11,
-            '<script src="index.js"></script>': 1,
+            '<section class="card">': 8,
+            '<dialog class="modal guide-modal">': 12,
+            '<div class="toast hide">Ссылка скопирована</div>': 11,
+            '<script src="afisha.js"></script>': 1,
         }),
         "css": (1, {
             ".header {": 2, ".card {": 5, ".section-title {": 6, ".link {": 3,
@@ -91,24 +91,24 @@ PAGES = {
             ".toast {": 11, ".modal {": 12,
         }),
         "js": (9, {
-            "// ---------- Поиск ----------": 10,
-            "// ---------- Кнопка «Иду» ----------": 11,
-            "// ---------- Окна ----------": 12,
+            "document.querySelector('.search-btn').addEventListener('click', function () {": 10,
+            "let going = JSON.parse(localStorage.getItem('going') || 'null');": 11,
+            "const guideModal = document.querySelector('.guide-modal');": 12,
         }),
     },
     # ---------------- Профиль (Плешивых) ----------------
     "profile": {
         "html": (1, {
-            "<!-- Шапка (как на афише) -->": 2,
-            "<!-- Карточка пользователя -->": 3,
+            '<header class="header">': 2,
+            '<section class="card">#1': 3,
             '<div class="stats">': 4,
-            "<!-- Ближайший билет -->": 5,
-            "<!-- Любимые категории -->": 6,
-            "<!-- Район -->": 7,
-            "<!-- Активность друзей -->": 8,
-            "<!-- Настройки -->": 9,
-            "<!-- О сервисе -->": 10,
-            "<!-- Окно: редактирование профиля -->": 12,
+            '<h2 class="section-title">#1': 5,
+            '<h2 class="section-title">#2': 6,
+            '<h2 class="section-title">#3': 7,
+            '<h2 class="section-title">#4': 8,
+            '<h2 class="section-title">#5': 9,
+            '<h2 class="section-title">#6': 10,
+            '<dialog class="modal edit-modal">': 12,
             '<script src="profile.js"></script>': 1,
         }),
         "css": (1, {
@@ -121,8 +121,8 @@ PAGES = {
             ".switch {#2": 11, ".sync-btn,": 12,
         }),
         "js": (12, {
-            "// ---------- «Тоже иду» ----------": 11,
-            "// ---------- Служба заботы ----------": 12,
+            "const friendGoButton = document.querySelector('.go-btn');": 11,
+            "document.querySelector('.support-link').addEventListener('click', function (event) {": 12,
         }),
     },
 }

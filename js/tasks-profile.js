@@ -395,7 +395,7 @@
             hint: ['<a href="..." class="...">', 'position: fixed', 'bottom: 0', 'left: 0', 'right: 0', 'max-width', 'margin: 0 auto'],
             start: {
                 html: '<section class="card">\n    <!-- сюда ссылку выхода -->\n\n</section>\n\n' +
-                    '<nav class="bottom-nav">\n    <a href="../index/index.html"><div class="icon">event_available</div>Афиша</a>\n' +
+                    '<nav class="bottom-nav">\n    <a href="../afisha/afisha.html"><div class="icon">event_available</div>Афиша</a>\n' +
                     '    <!-- сюда ссылку на профиль -->\n\n</nav>',
                 css: '.logout {\n    \n}\n\n.logout .icon {\n    \n}\n\n.bottom-nav {\n    \n}\n\n.bottom-nav a.active {\n    \n}\n\n/* Уже готово */\n' +
                     '.bottom-nav a {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    gap: 4px;\n' +
@@ -404,7 +404,7 @@
             answer: {
                 html: '<section class="card">\n    <a href="../login/login.html" class="list-item logout logout-link">\n        <div class="icon">logout</div>\n' +
                     '        <div class="list-item-text">Выйти из аккаунта</div>\n    </a>\n</section>\n\n' +
-                    '<nav class="bottom-nav">\n    <a href="../index/index.html"><div class="icon">event_available</div>Афиша</a>\n' +
+                    '<nav class="bottom-nav">\n    <a href="../afisha/afisha.html"><div class="icon">event_available</div>Афиша</a>\n' +
                     '    <a href="../profile/profile.html" class="active"><div class="icon">person</div>Профиль</a>\n</nav>',
                 css: '.logout {\n    color: #ff6b6b;\n}\n\n.logout .icon {\n    color: #ff6b6b;\n}\n\n' +
                     '.bottom-nav {\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    max-width: 430px;\n    margin: 0 auto;\n' +

@@ -6,7 +6,7 @@ window.QUEST_CONFIG = {
     // ученики: кнопки на экране входа (в этом порядке) и их страницы
     students: [
         { name: 'Лев Ложников', page: 'login' },
-        { name: 'Самвел Аракелян', page: 'index' },
+        { name: 'Самвел Аракелян', page: 'afisha' },
         { name: 'Кирилл Зяблов', page: 'register' },
         { name: 'Андрей Плешивых', page: 'profile' },
     ],
@@ -14,7 +14,7 @@ window.QUEST_CONFIG = {
     // как называются страницы
     pages: {
         login: { title: 'Вход' },
-        index: { title: 'Афиша' },
+        afisha: { title: 'Афиша' },
         register: { title: 'Регистрация' },
         profile: { title: 'Профиль' },
     },

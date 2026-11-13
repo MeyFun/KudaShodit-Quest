@@ -78,7 +78,7 @@
         return t.all('.event').filter(function (e) { return t.visible(e); }).length;
     }
 
-    QUEST_TASKS.index = [
+    QUEST_TASKS.afisha = [
         // 1
         T.base(),
 
@@ -322,7 +322,7 @@
             title: 'Блок «Предложить» и нижнее меню',
             kind: 'HTML + CSS',
             text: '<p>В конце страницы — блок «Знаешь классное место?» и меню, которое <b>прилипает к низу экрана</b>.</p><ul>' +
-                '<li>HTML: в <code>&lt;nav class="bottom-nav"&gt;</code> две ссылки: на <code>../index/index.html</code> с классом ' +
+                '<li>HTML: в <code>&lt;nav class="bottom-nav"&gt;</code> две ссылки: на <code>../afisha/afisha.html</code> с классом ' +
                 '<code>active</code> (иконка <code>event_available</code>, текст «Афиша») и на <code>../profile/profile.html</code> ' +
                 '(иконка <code>person</code>, текст «Профиль»)</li>' +
                 '<li><code>.bottom-nav</code>: <code>position: fixed</code>, <code>bottom: 0</code>, <code>left: 0</code>, <code>right: 0</code>, ' +
@@ -345,7 +345,7 @@
                 html: '<section class="card">\n    <h2 class="section-title">Знаешь классное место? <div class="icon">add_location_alt</div></h2>\n' +
                     '    <p class="muted">Добавь бесплатный квартирник, встречу или лекцию в Омске в ленту за 1 минуту.</p>\n' +
                     '    <button class="btn btn-big open-suggest">Предложить событие</button>\n</section>\n\n' +
-                    '<nav class="bottom-nav">\n    <a href="../index/index.html" class="active"><div class="icon">event_available</div>Афиша</a>\n' +
+                    '<nav class="bottom-nav">\n    <a href="../afisha/afisha.html" class="active"><div class="icon">event_available</div>Афиша</a>\n' +
                     '    <a href="../profile/profile.html"><div class="icon">person</div>Профиль</a>\n</nav>',
                 css: '.bottom-nav {\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    max-width: 430px;\n    margin: 0 auto;\n' +
                     '    display: flex;\n    background: #1c1c20;\n    border-top: 1px solid #2e2e34;\n}\n\n' +
@@ -355,7 +355,7 @@
                 ['В меню 2 ссылки', function (t) { return t.all('.bottom-nav a').length === 2; }],
                 ['Ссылки ведут на афишу и профиль', function (t) {
                     const links = t.all('.bottom-nav a').map(function (a) { return a.getAttribute('href'); }).join(' ');
-                    return links === '../index/index.html ../profile/profile.html';
+                    return links === '../afisha/afisha.html ../profile/profile.html';
                 }],
                 ['Ссылка «Афиша» с классом active', function (t) {
                     return t.has('.bottom-nav a', 'active') && t.text('.bottom-nav a').indexOf('Афиша') >= 0;

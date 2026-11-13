@@ -33,7 +33,7 @@
         T.base(),
 
         // 2
-        T.headerBack('../index/index.html', 'Вход', 'на афишу'),
+        T.headerBack('../afisha/afisha.html', 'Вход', 'на афишу'),
 
         // 3
         {
@@ -49,7 +49,7 @@
             hint: ['display: flex', 'justify-content: space-between', 'align-items', 'gap', 'border-radius', 'width', 'height', 'font-size', 'color'],
             start: {
                 html: '<div class="page-title">\n    <b class="chip"><div class="dot"></div>ОМСК · АФИША</b>\n' +
-                    '    <a href="../index/index.html" class="logo-title">КУДА_СХОДИТЬ</a>\n</div>\n\n' +
+                    '    <a href="../afisha/afisha.html" class="logo-title">КУДА_СХОДИТЬ</a>\n</div>\n\n' +
                     '<h1 class="auth-title">С возвращением! ✨</h1>\n' +
                     '<p class="muted">Войдите, чтобы видеть планы друзей и не пропускать лучшие события Омска</p>',
                 css: '.page-title {\n    \n}\n\n.chip {\n    \n}\n\n.dot {\n    \n}\n\n.auth-title {\n    \n}\n\n.muted {\n    \n}\n\n' +
