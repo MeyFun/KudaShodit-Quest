@@ -299,6 +299,14 @@ body.teacher .teacher-only {
     gap: 12px;
 }
 
+/* Условие и подсказки нельзя выделить — команды ученик пишет сам */
+.task-head,
+.task-text,
+.hints {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 .task-number {
     color: var(--accent);
     font-weight: 800;

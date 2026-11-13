@@ -231,6 +231,30 @@
         updatePreview();
     }
 
+    // ---------- Запрет копирования условия и подсказок ----------
+    // команды из условия нельзя скопировать: ни Ctrl+C, ни правой кнопкой, ни перетаскиванием
+    const NO_COPY = '.task-head, .task-text, .hints';
+
+    function fromTaskText(node) {
+        const el = node && (node.nodeType === 1 ? node : node.parentElement);
+        return !!el && !!el.closest(NO_COPY);
+    }
+
+    ['copy', 'cut'].forEach(function (type) {
+        document.addEventListener(type, function (event) {
+            const sel = document.getSelection();
+            if (sel && (fromTaskText(sel.anchorNode) || fromTaskText(sel.focusNode))) {
+                event.preventDefault();
+            }
+        });
+    });
+
+    ['contextmenu', 'dragstart', 'selectstart'].forEach(function (type) {
+        document.addEventListener(type, function (event) {
+            if (fromTaskText(event.target)) event.preventDefault();
+        });
+    });
+
     $('.reset-code').addEventListener('click', function () {
         if (!confirm('Вернуть стартовый код задачи? Твой код в этой задаче сотрётся.')) return;
         delete progress.code[current];
