@@ -93,8 +93,12 @@ document.addEventListener('submit', function (e) {
     // ---------- Рендер в iframe ----------
     function render(iframe, html) {
         return new Promise(function (resolve) {
+            // если окно перерисуют раньше, прошлое ожидание завершится, а не повиснет
+            if (iframe.__finishRender) iframe.__finishRender();
+            iframe.__finishRender = resolve;
             iframe.onload = function () {
                 iframe.onload = null;
+                iframe.__finishRender = null;
                 resolve();
             };
             iframe.srcdoc = html;
@@ -102,6 +106,8 @@ document.addEventListener('submit', function (e) {
     }
 
     // ---------- Помощник для проверок ----------
+    const LAYOUT_PROPS = /^(width|height|min-width|min-height|max-width|max-height|top|left|right|bottom|border-(top|right|bottom|left)-width|outline-width)$/;
+
     function toHex(value) {
         const m = String(value).match(/rgba?\(([^)]+)\)/);
         if (!m) return String(value).toLowerCase();
@@ -114,6 +120,29 @@ document.addEventListener('submit', function (e) {
 
     function helper(win) {
         const doc = win.document;
+        // значение свойства из CSS-правил, которые подходят элементу (последнее по порядку)
+        function declared(e, prop) {
+            let value = '';
+            function walk(rules) {
+                Array.from(rules).forEach(function (r) {
+                    if (r.media && r.cssRules) {
+                        if (win.matchMedia(r.media.mediaText).matches) walk(r.cssRules);
+                        return;
+                    }
+                    if (!r.selectorText || !r.style) return;
+                    let fits = false;
+                    try { fits = e.matches(r.selectorText); } catch (err) { fits = false; }
+                    if (fits && r.style.getPropertyValue(prop)) value = r.style.getPropertyValue(prop).trim();
+                });
+            }
+            Array.from(doc.styleSheets).forEach(function (sheet) {
+                let rules;
+                try { rules = sheet.cssRules; } catch (err) { return; }
+                walk(rules);
+            });
+            if (e.style && e.style.getPropertyValue(prop)) value = e.style.getPropertyValue(prop).trim();
+            return value;
+        }
         function el(sel) {
             return typeof sel === 'string' ? doc.querySelector(sel) : sel;
         }
@@ -131,7 +160,16 @@ document.addEventListener('submit', function (e) {
                 const e = el(sel);
                 return e ? win.getComputedStyle(e).getPropertyValue(prop).trim() : '';
             },
-            px: function (sel, prop) { return parseFloat(this.css(sel, prop)) || 0; },
+            // размеры и толщину рамок берём из CSS-правил: отрисованное значение зависит
+            // от масштаба экрана (125%, 90%...) и сжатия во flex, а заданное — нет
+            px: function (sel, prop) {
+                if (LAYOUT_PROPS.test(prop)) {
+                    const e = el(sel);
+                    const value = e ? declared(e, prop) : '';
+                    if (/^-?[\d.]+px$/.test(value)) return parseFloat(value);
+                }
+                return parseFloat(this.css(sel, prop)) || 0;
+            },
             color: function (sel, prop) { return toHex(this.css(sel, prop || 'color')); },
             text: function (sel) {
                 const e = el(sel);

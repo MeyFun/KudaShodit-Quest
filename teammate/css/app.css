@@ -60,6 +60,11 @@ code {
     cursor: pointer;
 }
 
+/* ссылка, оформленная как кнопка */
+a.btn {
+    text-decoration: none;
+}
+
 .btn:hover {
     filter: brightness(1.15);
 }
@@ -149,6 +154,10 @@ code {
 
 .back-link:hover {
     color: var(--accent);
+}
+
+.back-link + .back-link {
+    margin-left: 16px;
 }
 
 /* Кнопки выбора ученика */

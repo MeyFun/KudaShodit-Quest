@@ -282,10 +282,19 @@
 
     // ---------- Проверка ----------
     $('.check-btn').addEventListener('click', async function () {
-        const task = tasks[current];
-        const result = await Quest.check($('.preview'), page, current, task, currentCode());
-        showResult(result);
-        if (result.ok) solve();
+        const button = $('.check-btn');
+        if (button.disabled) return;
+        // отложенное обновление превью перезагрузило бы окно посреди проверки
+        clearTimeout(previewTimer);
+        button.disabled = true;
+        try {
+            const task = tasks[current];
+            const result = await Quest.check($('.preview'), page, current, task, currentCode());
+            showResult(result);
+            if (result.ok) solve();
+        } finally {
+            button.disabled = false;
+        }
     });
 
     function showResult(result) {
