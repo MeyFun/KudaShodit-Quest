@@ -38,9 +38,9 @@ window.QUEST_CONFIG = {
         'send.svg', 'receipt.svg', 'group-add.svg', 'group-altai.jpg', 'group-cottage.jpg', 'cocktail.svg',
     ],
 
-    // хеш пароля учителя (сейчас пароль: split2026).
+    // хеш пароля учителя (сейчас пароль: 1111).
     // Новый хеш: открой консоль на сайте (F12) и выполни Quest.hash('новый пароль')
-    teacherHash: 3028005681,
+    teacherHash: 2085882693,
 };
 
 // Задачи страниц заполняются в файлах js/tasks-*.js

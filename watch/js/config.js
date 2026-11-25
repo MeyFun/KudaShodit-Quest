@@ -41,9 +41,9 @@ window.QUEST_CONFIG = {
         'room-interstellar.jpg', 'room.svg', 'search.svg', 'sparkle.svg', 'star-kp.svg', 'star.svg', 'tab-friends.svg', 'tab-rooms.svg',
     ],
 
-    // хеш пароля учителя (сейчас пароль: kino2026).
+    // хеш пароля учителя (сейчас пароль: 4444).
     // Новый хеш: открой консоль на сайте (F12) и выполни Quest.hash('новый пароль')
-    teacherHash: 3435120672,
+    teacherHash: 2085706245,
 };
 
 // Задачи страниц заполняются в файлах js/tasks-*.js

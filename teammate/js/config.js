@@ -35,9 +35,9 @@ window.QUEST_CONFIG = {
     imageSource: 'site/img/',
     downloadImages: ['cs2.jpg', 'cyberpunk.jpg', 'dota.jpg', 'valorant.jpg'],
 
-    // хеш пароля учителя (сейчас пароль: team2026).
+    // хеш пароля учителя (сейчас пароль: 2222).
     // Новый хеш: открой консоль на сайте (F12) и выполни Quest.hash('новый пароль')
-    teacherHash: 155662846,
+    teacherHash: 2085915525,
 };
 
 // Задачи страниц заполняются в файлах js/tasks-*.js
