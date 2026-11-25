@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квест СПЛИТ</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+    <link rel="stylesheet" href="css/app.css?v=7">
+</head>
+<body>
+
+<!-- ================= Экран входа ================= -->
+<section class="screen login-screen">
+    <div class="login-box">
+        <a class="back-link" href="../">← Все темы</a>
+        <div class="logo">СПЛИТ <span>квест</span></div>
+        <h1>Собери свою страницу</h1>
+        <p class="muted">Решай задачи по порядку — за каждую открывается кусок готового кода. В конце скачаешь свою страницу целиком.</p>
+        <h2 class="choose-title">Выберите профиль:</h2>
+        <!-- кнопки учеников создаёт app.js из списка в config.js -->
+        <div class="profiles"></div>
+    </div>
+</section>
+
+<!-- ================= Экран квеста ================= -->
+<section class="screen quest-screen hidden">
+    <header class="topbar">
+        <div class="logo">СПЛИТ <span>квест</span></div>
+        <div class="who"></div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <div class="progress-text"></div>
+        <button class="btn site-btn">Мой сайт</button>
+        <button class="btn btn-ghost logout-btn">Выйти</button>
+    </header>
+
+    <div class="teacher-bar teacher-only">
+        <b>Режим учителя</b>
+        <button class="btn show-answer">Эталон</button>
+        <button class="btn btn-accent insert-answer">Вставить эталон</button>
+        <button class="btn reset-progress">Сбросить прогресс</button>
+        <button class="btn btn-ghost teacher-exit">Выйти из режима</button>
+    </div>
+
+    <main class="layout">
+        <!-- список задач -->
+        <nav class="task-list"></nav>
+
+        <!-- условие и редактор -->
+        <section class="task">
+            <div class="task-head">
+                <div class="task-number"></div>
+                <h2 class="task-title"></h2>
+            </div>
+            <div class="task-text"></div>
+            <div class="hints"></div>
+
+            <div class="tabs editor-tabs"></div>
+            <div class="editors"></div>
+
+            <div class="task-actions">
+                <button class="btn btn-accent check-btn">Проверить</button>
+                <button class="btn btn-ghost reset-code">Сбросить код задачи</button>
+            </div>
+        </section>
+
+        <!-- превью и результаты проверки -->
+        <section class="side">
+            <div class="side-title">Превью</div>
+            <iframe class="preview" title="Превью"></iframe>
+            <div class="checks"></div>
+            <div class="success hidden">
+                <b>Задача решена! 🎉</b>
+                <p>Открыт новый кусок кода твоей страницы.</p>
+                <div class="success-actions">
+                    <button class="btn see-code">Посмотреть код</button>
+                    <button class="btn btn-accent next-task">Следующая задача →</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</section>
+
+<!-- ================= Окно «Мой сайт» ================= -->
+<dialog class="site-dialog">
+    <div class="site-head">
+        <h2>Моя страница</h2>
+        <div class="tabs site-tabs">
+            <button class="tab active" data-view="preview">Превью</button>
+            <button class="tab" data-view="html">HTML</button>
+            <button class="tab" data-view="css">CSS</button>
+            <button class="tab" data-view="js">JS</button>
+        </div>
+        <button class="btn btn-accent download-btn">Скачать страницу</button>
+        <button class="btn btn-ghost close-site">Закрыть</button>
+    </div>
+    <p class="site-note muted"></p>
+    <iframe class="site-preview" title="Моя страница"></iframe>
+    <pre class="code-view hidden"></pre>
+</dialog>
+
+<!-- ================= Окно пароля учителя ================= -->
+<dialog class="teacher-dialog">
+    <h2>Режим учителя</h2>
+    <form class="teacher-form">
+        <input class="field" name="password" type="password" placeholder="Пароль">
+        <p class="error hidden">Неверный пароль</p>
+        <button class="btn btn-accent" type="submit">Войти</button>
+        <button class="btn btn-ghost close-dialog" type="button">Отмена</button>
+    </form>
+</dialog>
+
+<!-- ================= Окно эталона ================= -->
+<dialog class="answer-dialog">
+    <h2>Эталонное решение</h2>
+    <div class="answer-code"></div>
+    <button class="btn btn-ghost close-dialog">Закрыть</button>
+</dialog>
+
+<!-- Библиотеки: редактор кода и архиватор для скачивания -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closetag.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!-- Квест -->
+<script src="data/code.js?v=7"></script>
+<script src="js/config.js?v=7"></script>
+<script src="js/engine.js?v=7"></script>
+<script src="js/tasks-common.js?v=7"></script>
+<script src="js/tasks-home.js?v=7"></script>
+<script src="js/tasks-groups.js?v=7"></script>
+<script src="js/tasks-collections.js?v=7"></script>
+<script src="js/tasks-settlements.js?v=7"></script>
+<script src="js/app.js?v=7"></script>
+</body>
+</html>

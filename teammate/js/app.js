@@ -348,7 +348,7 @@
         const all = progress.solved >= tasks.length;
         $('.download-btn').disabled = !all;
         $('.site-note').textContent = all
-            ? 'Все задачи решены — страница открыта целиком. Скачай её и перенеси в свой репозиторий KudaShodit.'
+            ? 'Все задачи решены — страница открыта целиком. Скачай её и перенеси в репозиторий команды ' + (config.repoName || '') + '.'
             : 'Открыто задач: ' + progress.solved + ' из ' + tasks.length +
               '. Замазанный код откроется, когда решишь следующие задачи. JS заработает в превью после последней задачи.';
         siteDialog.showModal();
@@ -410,6 +410,12 @@
             const zip = new window.JSZip();
             const folder = zip.folder(page);
             Object.keys(files).forEach(function (name) { folder.file(name, files[name]); });
+            // общие картинки сайта кладём рядом, в папку img (на неё ссылается код ../img/...)
+            const images = config.downloadImages || [];
+            for (const name of images) {
+                const response = await fetch(config.imageSource + name);
+                if (response.ok) zip.folder('img').file(name, await response.blob());
+            }
             const blob = await zip.generateAsync({ type: 'blob' });
             downloadBlob(blob, page + '.zip');
         } else {
@@ -432,7 +438,7 @@
     const teacherDialog = $('.teacher-dialog');
     const teacherForm = $('.teacher-form');
 
-    if (sessionStorage.getItem('kq-teacher') === '1') {
+    if (sessionStorage.getItem('kq-teacher-teammate') === '1') {
         document.body.classList.add('teacher');
     }
 
@@ -449,7 +455,7 @@
     teacherForm.addEventListener('submit', function (event) {
         event.preventDefault();
         if (Quest.hash(teacherForm.elements.password.value) === config.teacherHash) {
-            sessionStorage.setItem('kq-teacher', '1');
+            sessionStorage.setItem('kq-teacher-teammate', '1');
             document.body.classList.add('teacher');
             teacherDialog.close();
         } else {
@@ -462,7 +468,7 @@
     });
 
     $('.teacher-exit').addEventListener('click', function () {
-        sessionStorage.removeItem('kq-teacher');
+        sessionStorage.removeItem('kq-teacher-teammate');
         document.body.classList.remove('teacher');
     });
 

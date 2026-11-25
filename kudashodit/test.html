@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Самопроверка задач квеста</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #111114; color: #f2f2f2; padding: 20px; }
+        .ok { color: #81c784; }
+        .bad { color: #ff8a80; }
+        li { margin: 4px 0; }
+        iframe { width: 430px; height: 300px; border: 1px solid #333; }
+    </style>
+</head>
+<body>
+<h1>Самопроверка задач</h1>
+<p>Для каждой задачи: эталон должен пройти все проверки, а стартовый код — нет.</p>
+<p class="summary">Идёт проверка…</p>
+<ul class="report"></ul>
+<iframe class="frame"></iframe>
+
+<script src="data/code.js?v=11"></script>
+<script src="js/config.js?v=11"></script>
+<script src="js/engine.js?v=11"></script>
+<script src="js/tasks-common.js?v=11"></script>
+<script src="js/tasks-login.js?v=11"></script>
+<script src="js/tasks-afisha.js?v=11"></script>
+<script src="js/tasks-register.js?v=11"></script>
+<script src="js/tasks-profile.js?v=11"></script>
+<script>
+    // эталон = стартовый код, где поля из answer заменены
+    function answerCode(task) {
+        const code = {};
+        ['html', 'css', 'js'].forEach(function (k) {
+            if (task.start[k] !== undefined) {
+                code[k] = task.answer[k] !== undefined ? task.answer[k] : task.start[k];
+            }
+        });
+        return code;
+    }
+
+    async function run() {
+        const frame = document.querySelector('.frame');
+        const report = document.querySelector('.report');
+        let failed = 0;
+        let total = 0;
+
+        for (const page of Object.keys(QUEST_TASKS)) {
+            const tasks = QUEST_TASKS[page];
+            for (let i = 0; i < tasks.length; i++) {
+                const task = tasks[i];
+                total++;
+                const good = await Quest.check(frame, page, i, task, answerCode(task));
+                const empty = await Quest.check(frame, page, i, task, task.start);
+
+                const li = document.createElement('li');
+                const problems = [];
+                if (!good.ok) {
+                    good.results.filter(function (r) { return !r.ok; }).forEach(function (r) {
+                        problems.push('эталон не прошёл: ' + r.label + (r.note ? ' (' + r.note + ')' : ''));
+                    });
+                    good.errors.forEach(function (e) { problems.push('ошибка JS в эталоне: ' + e); });
+                }
+                if (empty.ok) problems.push('стартовый код засчитывается без решения!');
+
+                li.className = problems.length ? 'bad' : 'ok';
+                li.textContent = page + ' #' + (i + 1) + ' «' + task.title + '»: ' + (problems.length ? problems.join('; ') : 'ок');
+                report.appendChild(li);
+                if (problems.length) failed++;
+            }
+        }
+        document.querySelector('.summary').textContent =
+            'Готово: задач ' + total + ', с ошибками ' + failed + '.';
+        document.querySelector('.summary').className = 'summary ' + (failed ? 'bad' : 'ok');
+        window.__testDone = { total: total, failed: failed };
+    }
+
+    run();
+</script>
+</body>
+</html>

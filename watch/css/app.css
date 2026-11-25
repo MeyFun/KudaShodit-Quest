@@ -1,5 +1,5 @@
 /* =========================================================
-   Квест КУДА_СХОДИТЬ — стили самого сайта-квеста
+   Квест КИНОСФЕРА — стили самого сайта-квеста
    ========================================================= */
 
 :root {
@@ -136,6 +136,19 @@ code {
 .choose-title {
     font-size: 16px;
     margin-top: 6px;
+}
+
+/* Ссылка назад к выбору темы */
+.back-link {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: var(--accent);
 }
 
 /* Кнопки выбора ученика */
@@ -541,7 +554,7 @@ dialog h2 {
 
 .site-preview {
     flex: 1;
-    width: 430px;
+    width: 100%;
     max-width: 100%;
     margin: 0 auto;
     border: 1px solid var(--line);
@@ -594,5 +607,11 @@ pre,
 
     .quest-screen {
         height: auto;
+    }
+
+    /* превью остаётся узким, как телефон, иначе медиазапросы сайта не сработают */
+    .preview {
+        max-width: 420px;
+        align-self: center;
     }
 }
