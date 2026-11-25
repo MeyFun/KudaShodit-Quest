@@ -498,6 +498,15 @@
         updatePreview();
     });
 
+    // задача засчитывается без проверки, сразу открывается следующая
+    $('.skip-task').addEventListener('click', function () {
+        if (!page) return;
+        if (!confirm('Засчитать задачу ' + (current + 1) + ' без проверки?')) return;
+        progress.code[current] = currentCode();
+        solve();
+        if (current + 1 < tasks.length) openTask(current + 1);
+    });
+
     $('.reset-progress').addEventListener('click', function () {
         if (!page) return;
         if (!confirm('Стереть весь прогресс ученика ' + surname + '? Это нельзя отменить.')) return;
