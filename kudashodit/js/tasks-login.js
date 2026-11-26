@@ -75,7 +75,7 @@
                 }],
                 ['.chip: текст 11px', function (t) { return t.px('.chip', 'font-size') === 11; }],
                 ['.dot: круг 7×7px', function (t) {
-                    return t.px('.dot', 'width') === 7 && t.px('.dot', 'height') === 7 && t.css('.dot', 'border-top-left-radius') === '50%';
+                    return t.px('.dot', 'width') === 7 && t.px('.dot', 'height') === 7 && t.round('.dot');
                 }],
                 ['.dot: оранжевая', function (t) { return t.color('.dot', 'background-color') === '#f5a623'; }],
                 ['.auth-title: 26px', function (t) { return t.px('.auth-title', 'font-size') === 26; }],

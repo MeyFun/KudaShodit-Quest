@@ -87,7 +87,7 @@
                 ['.profile-head: промежуток 14px', function (t) { return t.css('.profile-head', 'column-gap') === '14px'; }],
                 ['Аватарка 66×66px и круглая', function (t) {
                     return t.px('.avatar-big', 'width') === 66 && t.px('.avatar-big', 'height') === 66 &&
-                        t.css('.avatar-big', 'border-top-left-radius') === '50%';
+                        t.round('.avatar-big');
                 }],
                 ['Аватарка оранжевая, буква тёмная', function (t) {
                     return t.color('.avatar-big', 'background-color') === '#f5a623' && t.color('.avatar-big', 'color') === '#1a1a1a';
@@ -289,7 +289,7 @@
                 }],
                 ['.map-circle: 80×80px и круглый', function (t) {
                     return t.px('.map-circle', 'width') === 80 && t.px('.map-circle', 'height') === 80 &&
-                        t.css('.map-circle', 'border-top-left-radius') === '50%';
+                        t.round('.map-circle');
                 }],
                 ['.map-circle: синяя рамка 2px #2b6fd6', function (t) {
                     return Math.abs(t.px('.map-circle', 'border-top-width') - 2) <= 0.5 && t.color('.map-circle', 'border-top-color') === '#2b6fd6';
@@ -374,7 +374,7 @@
                     return t.css('.switch', 'display') === 'flex' && t.css('.switch', 'justify-content') === 'flex-end';
                 }],
                 ['.knob: круг 20×20px, фон #3a2a00', function (t) {
-                    return t.px('.knob', 'width') === 20 && t.css('.knob', 'border-top-left-radius') === '50%' &&
+                    return t.px('.knob', 'width') === 20 && t.round('.knob') &&
                         t.color('.knob', 'background-color') === '#3a2a00';
                 }],
             ],

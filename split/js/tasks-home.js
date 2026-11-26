@@ -207,7 +207,7 @@
                         t.css('.kpi-sum', 'font-weight') === '800';
                 }],
                 ['.kpi-icon: круг 48×48px', function (t) {
-                    return t.px('.kpi-icon', 'width') === 48 && t.px('.kpi-icon', 'height') === 48 && t.css('.kpi-icon', 'border-top-left-radius') === '50%';
+                    return t.px('.kpi-icon', 'width') === 48 && t.px('.kpi-icon', 'height') === 48 && t.round('.kpi-icon');
                 }],
                 ['.kpi-icon: фон #eae7e8, картинка по центру', function (t) {
                     return t.color('.kpi-icon:not(.kpi-icon-pink)', 'background-color') === '#eae7e8' &&

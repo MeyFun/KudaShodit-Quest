@@ -131,7 +131,7 @@
                 }],
                 ['.dot: оранжевый круг 8×8px', function (t) {
                     return t.px('.dot', 'width') === 8 && t.px('.dot', 'height') === 8 &&
-                        t.css('.dot', 'border-top-left-radius') === '50%' && t.color('.dot', 'background-color') === '#f5a623';
+                        t.round('.dot') && t.color('.dot', 'background-color') === '#f5a623';
                 }],
             ],
         },

@@ -226,7 +226,7 @@
                 }],
                 ['.round-button: круг 48×48px', function (t) {
                     return t.px('.round-button', 'width') === 48 && t.px('.round-button', 'height') === 48 &&
-                        t.css('.round-button', 'border-top-left-radius') === '50%';
+                        t.round('.round-button');
                 }],
                 ['.round-button: фон #2a2935, картинка по центру', function (t) {
                     return t.color('.round-button', 'background-color') === '#2a2935' && t.css('.round-button', 'justify-content') === 'center';
@@ -354,7 +354,7 @@
                     return t.color('.review', 'background-color') === '#2a2935' && t.px('.review', 'border-top-left-radius') === 16;
                 }],
                 ['Фото автора: круг 28×28px', function (t) {
-                    return t.px('.review-author img', 'width') === 28 && t.css('.review-author img', 'border-top-left-radius') === '50%';
+                    return t.px('.review-author img', 'width') === 28 && t.round('.review-author img');
                 }],
             ],
         },

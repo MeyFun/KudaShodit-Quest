@@ -277,7 +277,7 @@ QuestTasks.header = function (active) {
             }],
             ['.logo-icon: круг 40×40px', function (t) {
                 return t.px('.logo-icon', 'width') === 40 && t.px('.logo-icon', 'height') === 40 &&
-                    t.css('.logo-icon', 'border-top-left-radius') === '50%';
+                    t.round('.logo-icon');
             }],
             ['.logo-icon: фон #cf3a73, картинка по центру', function (t) {
                 return t.color('.logo-icon', 'background-color') === '#cf3a73' && t.css('.logo-icon', 'display') === 'flex' &&

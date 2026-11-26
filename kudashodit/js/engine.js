@@ -205,6 +205,13 @@ document.addEventListener('submit', function (e) {
                 });
                 return value;
             },
+            // круг: скругление не меньше половины размера (50%, 100%, 999px — всё подходит)
+            round: function (sel) {
+                const r = this.css(sel, 'border-top-left-radius');
+                if (/%$/.test(r)) return parseFloat(r) >= 50;
+                const size = Math.min(this.px(sel, 'width'), this.px(sel, 'height'));
+                return size > 0 && parseFloat(r) >= size / 2 - 0.5;
+            },
             click: function (sel) { need(sel).click(); },
             type: function (sel, value) {
                 const e = need(sel);

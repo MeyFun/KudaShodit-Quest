@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Теория — квесты по вёрстке</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Manrope", Arial, sans-serif;
+            line-height: 1.5;
+            color: #f2f2f2;
+            background: #111114;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+
+        .top-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #9a9aa2;
+        }
+
+        .top-links a:hover {
+            color: #f5a623;
+        }
+
+        .logo {
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #f5a623;
+        }
+
+        h1 {
+            margin: 6px 0 8px;
+            font-size: 34px;
+            line-height: 1.2;
+        }
+
+        .lead {
+            color: #9a9aa2;
+        }
+
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin: 20px 0 8px;
+            padding: 12px 0;
+            background: #111114;
+        }
+
+        .toolbar a {
+            padding: 7px 14px;
+            font-weight: 700;
+            background: #26262b;
+            border-radius: 999px;
+        }
+
+        .toolbar a:hover {
+            color: #f5a623;
+        }
+
+        .search {
+            flex: 1;
+            min-width: 200px;
+            padding: 9px 14px;
+            font: inherit;
+            color: #f2f2f2;
+            background: #1c1c20;
+            border: 1px solid #2e2e34;
+            border-radius: 10px;
+        }
+
+        h2 {
+            margin: 32px 0 6px;
+            padding-left: 12px;
+            font-size: 26px;
+            border-left: 5px solid var(--color);
+        }
+
+        h3 {
+            margin: 20px 0 6px;
+            font-size: 15px;
+            color: #9a9aa2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .list {
+            list-style: none;
+            background: #1c1c20;
+            border: 1px solid #2e2e34;
+            border-radius: 12px;
+        }
+
+        .list li {
+            display: grid;
+            grid-template-columns: minmax(200px, 2fr) 3fr;
+            gap: 16px;
+            padding: 9px 16px;
+            border-top: 1px solid #2e2e34;
+        }
+
+        .list li:first-child {
+            border-top: none;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+            color: var(--color);
+            overflow-wrap: anywhere;
+        }
+
+        .empty {
+            margin-top: 24px;
+            color: #9a9aa2;
+        }
+
+        .hide,
+        .list li.hide {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .list li {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <div class="top-links">
+            <a href="./">← Все темы</a>
+            <a href="https://0eaggle0.github.io/navigator-verstki/">Навигатор вёрстки</a>
+        </div>
+        <div class="logo">ТЕОРИЯ</div>
+        <h1>Команды HTML, CSS и JS</h1>
+        <p class="lead">Коротко: команда — что она делает. Здесь всё, что встречается в задачах квестов.</p>
+
+        <div class="toolbar">
+            <a href="#html">HTML</a>
+            <a href="#css">CSS</a>
+            <a href="#js">JS</a>
+            <input class="search" type="text" placeholder="Найти команду, например flex или submit">
+        </div>
+
+        <!-- ================= HTML ================= -->
+        <section id="html" class="chapter" style="--color: #f5a623">
+            <h2>HTML</h2>
+
+            <h3>Части страницы</h3>
+            <ul class="list">
+                <li><code>&lt;header&gt;</code><span>шапка страницы: логотип, меню</span></li>
+                <li><code>&lt;nav&gt;</code><span>меню со ссылками на разделы</span></li>
+                <li><code>&lt;main&gt;</code><span>основное содержимое страницы</span></li>
+                <li><code>&lt;section&gt;</code><span>раздел страницы</span></li>
+                <li><code>&lt;article&gt;</code><span>отдельная карточка: событие, фильм, отзыв</span></li>
+                <li><code>&lt;aside&gt;</code><span>боковая колонка, например с фильтрами</span></li>
+                <li><code>&lt;footer&gt;</code><span>подвал страницы</span></li>
+                <li><code>&lt;div&gt;</code><span>блок-обёртка: группирует элементы, чтобы их оформить</span></li>
+            </ul>
+
+            <h3>Текст</h3>
+            <ul class="list">
+                <li><code>&lt;h1&gt; &lt;h2&gt; &lt;h3&gt;</code><span>заголовки: h1 — главный, дальше поменьше</span></li>
+                <li><code>&lt;p&gt;</code><span>абзац текста</span></li>
+                <li><code>&lt;b&gt;</code><span>жирный текст</span></li>
+                <li><code>&lt;u&gt;</code><span>подчёркнутый текст</span></li>
+                <li><code>&lt;small&gt;</code><span>мелкий текст, например подпись</span></li>
+                <li><code>&lt;br&gt;</code><span>перенос строки</span></li>
+            </ul>
+
+            <h3>Ссылки, картинки, списки</h3>
+            <ul class="list">
+                <li><code>&lt;a href="..."&gt;</code><span>ссылка; в href — куда она ведёт</span></li>
+                <li><code>&lt;a href="#"&gt;</code><span>ссылка, которая пока никуда не ведёт</span></li>
+                <li><code>&lt;img src="..." alt="..."&gt;</code><span>картинка: src — путь к файлу, alt — текст вместо картинки</span></li>
+                <li><code>&lt;ul&gt; + &lt;li&gt;</code><span>список с точками, каждый пункт в li</span></li>
+                <li><code>&lt;ol&gt; + &lt;li&gt;</code><span>нумерованный список</span></li>
+            </ul>
+
+            <h3>Формы и кнопки</h3>
+            <ul class="list">
+                <li><code>&lt;form&gt;</code><span>форма: поля и кнопка отправки</span></li>
+                <li><code>&lt;label&gt;</code><span>подпись к полю; клик по подписи ставит курсор в поле</span></li>
+                <li><code>&lt;input&gt;</code><span>поле ввода в одну строку</span></li>
+                <li><code>type="text"</code><span>обычный текст</span></li>
+                <li><code>type="email"</code><span>почта (браузер проверяет @)</span></li>
+                <li><code>type="password"</code><span>пароль, буквы скрыты точками</span></li>
+                <li><code>type="tel"</code><span>телефон</span></li>
+                <li><code>type="number" min="1" max="5"</code><span>число со стрелками; min и max — границы</span></li>
+                <li><code>type="checkbox"</code><span>галочка</span></li>
+                <li><code>name="..."</code><span>имя поля, по нему JS достаёт значение</span></li>
+                <li><code>placeholder="..."</code><span>серая подсказка внутри пустого поля</span></li>
+                <li><code>value="..."</code><span>значение, которое стоит в поле сразу</span></li>
+                <li><code>&lt;textarea rows="4"&gt;</code><span>большое поле для текста; rows — высота в строках</span></li>
+                <li><code>readonly</code><span>поле только для чтения, менять нельзя</span></li>
+                <li><code>&lt;button type="button"&gt;</code><span>кнопка для JS (ничего не отправляет)</span></li>
+                <li><code>&lt;button type="submit"&gt;</code><span>кнопка, которая отправляет форму</span></li>
+            </ul>
+
+            <h3>Другое</h3>
+            <ul class="list">
+                <li><code>&lt;dialog&gt;</code><span>всплывающее окно; с атрибутом open — видно сразу</span></li>
+                <li><code>&lt;progress max="..." value="..."&gt;</code><span>полоска прогресса: сколько из скольких</span></li>
+                <li><code>class="..."</code><span>имя элемента для CSS и JS; можно несколько через пробел</span></li>
+                <li><code>data-id="..."</code><span>свои данные для JS (data-type, data-filter, data-level, data-rating...); в JS — element.dataset.id</span></li>
+                <li><code>&lt;link rel="stylesheet" href="..."&gt;</code><span>подключить файл CSS (в head)</span></li>
+                <li><code>&lt;script src="..."&gt;</code><span>подключить файл JS (в конце body)</span></li>
+            </ul>
+        </section>
+
+        <!-- ================= CSS ================= -->
+        <section id="css" class="chapter" style="--color: #7fd6a8">
+            <h2>CSS</h2>
+
+            <h3>Как писать правила</h3>
+            <ul class="list">
+                <li><code>селектор { свойство: значение; }</code><span>правило: кому и какой стиль</span></li>
+                <li><code>p</code><span>все элементы p</span></li>
+                <li><code>.card</code><span>все элементы с классом card</span></li>
+                <li><code>.card h3</code><span>h3 внутри .card</span></li>
+                <li><code>.chip.active</code><span>элемент, у которого есть оба класса</span></li>
+                <li><code>.a, .b</code><span>одно правило сразу для нескольких селекторов</span></li>
+                <li><code>:hover</code><span>стиль при наведении мыши</span></li>
+                <li><code>* { box-sizing: border-box; }</code><span>ширина считается вместе с отступами и рамкой</span></li>
+                <li><code>@media (max-width: 768px) { }</code><span>правила для узких экранов; писать в конце файла</span></li>
+            </ul>
+
+            <h3>Текст и цвет</h3>
+            <ul class="list">
+                <li><code>color</code><span>цвет текста</span></li>
+                <li><code>background</code><span>фон; background: none — без фона</span></li>
+                <li><code>rgba(0, 0, 0, 0.6)</code><span>цвет с прозрачностью (последнее число от 0 до 1)</span></li>
+                <li><code>font-family</code><span>шрифт, через запятую — запасные</span></li>
+                <li><code>font-size</code><span>размер текста</span></li>
+                <li><code>font-weight</code><span>жирность: 400 обычный, 700 жирный, 800 очень жирный</span></li>
+                <li><code>line-height</code><span>высота строки, например 1.5</span></li>
+                <li><code>text-align</code><span>выравнивание текста: left, center, right</span></li>
+                <li><code>text-decoration: none</code><span>убрать подчёркивание у ссылки</span></li>
+                <li><code>text-transform: uppercase</code><span>все буквы большие</span></li>
+                <li><code>list-style: none</code><span>убрать точки у списка</span></li>
+            </ul>
+
+            <h3>Размеры и отступы</h3>
+            <ul class="list">
+                <li><code>width / height</code><span>ширина / высота</span></li>
+                <li><code>width: 100%</code><span>на всю ширину родителя</span></li>
+                <li><code>max-width / min-width / min-height</code><span>не шире / не уже / не ниже чем</span></li>
+                <li><code>padding</code><span>внутренний отступ: от рамки до содержимого</span></li>
+                <li><code>padding: 10px 12px</code><span>10px сверху и снизу, 12px слева и справа</span></li>
+                <li><code>padding-top / padding-bottom / padding-left / padding-right</code><span>отступ только с одной стороны</span></li>
+                <li><code>margin</code><span>внешний отступ: от соседних элементов</span></li>
+                <li><code>margin-top / margin-bottom</code><span>внешний отступ сверху / снизу</span></li>
+                <li><code>margin: 0 auto</code><span>блок по центру по горизонтали</span></li>
+                <li><code>margin: auto</code><span>по центру со всех сторон (окно dialog)</span></li>
+                <li><code>margin-left: auto</code><span>прижать элемент вправо (во flex)</span></li>
+            </ul>
+
+            <h3>Рамки и эффекты</h3>
+            <ul class="list">
+                <li><code>border: 1px solid #333</code><span>рамка: толщина, вид, цвет</span></li>
+                <li><code>border: none</code><span>без рамки</span></li>
+                <li><code>border-top / border-bottom / border-left</code><span>линия только с одной стороны</span></li>
+                <li><code>border-color</code><span>только цвет рамки</span></li>
+                <li><code>border-radius</code><span>скругление углов; 50% или 999px — круг / «таблетка»</span></li>
+                <li><code>box-shadow</code><span>тень</span></li>
+                <li><code>outline: none</code><span>убрать обводку поля при клике</span></li>
+                <li><code>cursor: pointer</code><span>курсор-рука при наведении</span></li>
+                <li><code>resize: vertical</code><span>большое поле можно тянуть только по высоте</span></li>
+                <li><code>transition: 0.2s</code><span>плавная смена стиля, например при наведении</span></li>
+                <li><code>transform: translateY(-3px)</code><span>сдвинуть элемент вверх на 3px</span></li>
+                <li><code>::backdrop</code><span>фон за открытым окном dialog</span></li>
+            </ul>
+
+            <h3>Display</h3>
+            <ul class="list">
+                <li><code>display: block</code><span>элемент на всю строку</span></li>
+                <li><code>display: inline-block</code><span>в строку с текстом, но можно задать размеры</span></li>
+                <li><code>display: none</code><span>спрятать элемент</span></li>
+                <li><code>display: flex</code><span>дети в строку (или столбик)</span></li>
+                <li><code>display: grid</code><span>дети по сетке из колонок</span></li>
+            </ul>
+
+            <h3>Flex</h3>
+            <ul class="list">
+                <li><code>flex-direction: column</code><span>дети столбиком, а не в строку</span></li>
+                <li><code>justify-content: center</code><span>по центру вдоль главной оси</span></li>
+                <li><code>justify-content: space-between</code><span>края разнесены, между ними равное место</span></li>
+                <li><code>justify-content: flex-end</code><span>прижать к концу</span></li>
+                <li><code>align-items: center</code><span>по центру поперёк (по вертикали в строке)</span></li>
+                <li><code>align-items: flex-start</code><span>прижать к началу поперёк (к верху в строке)</span></li>
+                <li><code>gap</code><span>промежуток между детьми</span></li>
+                <li><code>flex-wrap: wrap</code><span>переносить детей на новую строку, если не влезают</span></li>
+                <li><code>flex: 1</code><span>ребёнок занимает всё свободное место</span></li>
+                <li><code>align-self: flex-start</code><span>один ребёнок не растягивается</span></li>
+            </ul>
+
+            <h3>Grid</h3>
+            <ul class="list">
+                <li><code>grid-template-columns: repeat(3, 1fr)</code><span>3 одинаковые колонки</span></li>
+                <li><code>grid-template-columns: 1fr 2fr</code><span>2 колонки, правая вдвое шире</span></li>
+                <li><code>1fr</code><span>одна доля свободного места</span></li>
+                <li><code>align-items: start</code><span>карточки в сетке прижаты к верху</span></li>
+            </ul>
+
+            <h3>Позиция и картинки</h3>
+            <ul class="list">
+                <li><code>position: relative</code><span>от этого блока считаются координаты детей с absolute</span></li>
+                <li><code>position: absolute</code><span>элемент поверх, по координатам top / left / right / bottom</span></li>
+                <li><code>position: fixed</code><span>прибит к окну, не уезжает при прокрутке</span></li>
+                <li><code>top / left / right / bottom</code><span>отступ от края для absolute и fixed</span></li>
+                <li><code>object-fit: cover</code><span>картинка заполняет блок без искажений (края обрезаются)</span></li>
+                <li><code>aspect-ratio: 2 / 3</code><span>пропорции: ширина к высоте</span></li>
+            </ul>
+        </section>
+
+        <!-- ================= JS ================= -->
+        <section id="js" class="chapter" style="--color: #a0cfce">
+            <h2>JS</h2>
+
+            <h3>Найти элементы</h3>
+            <ul class="list">
+                <li><code>document.querySelector('.menu')</code><span>первый элемент по селектору</span></li>
+                <li><code>document.querySelectorAll('.card')</code><span>все элементы по селектору</span></li>
+                <li><code>card.querySelector('h3')</code><span>искать только внутри card</span></li>
+                <li><code>element.closest('.card')</code><span>ближайший родитель с таким селектором</span></li>
+                <li><code>element.parentElement</code><span>родитель элемента</span></li>
+            </ul>
+
+            <h3>События</h3>
+            <ul class="list">
+                <li><code>addEventListener('click', function () { })</code><span>что сделать при клике</span></li>
+                <li><code>addEventListener('input', ...)</code><span>при каждой букве в поле</span></li>
+                <li><code>addEventListener('submit', ...)</code><span>при отправке формы</span></li>
+                <li><code>event.preventDefault()</code><span>не перезагружать страницу при отправке формы</span></li>
+                <li><code>event.target</code><span>элемент, по которому кликнули</span></li>
+            </ul>
+
+            <h3>Менять элементы</h3>
+            <ul class="list">
+                <li><code>classList.add('open')</code><span>добавить класс</span></li>
+                <li><code>classList.remove('open')</code><span>убрать класс</span></li>
+                <li><code>classList.toggle('open')</code><span>есть класс — убрать, нет — добавить</span></li>
+                <li><code>classList.contains('open')</code><span>есть ли класс (true / false)</span></li>
+                <li><code>textContent</code><span>текст элемента: прочитать или заменить</span></li>
+                <li><code>textContent = ''</code><span>очистить элемент</span></li>
+                <li><code>element.dataset.id</code><span>значение атрибута data-id</span></li>
+                <li><code>document.createElement('li')</code><span>создать новый элемент</span></li>
+                <li><code>list.append(item)</code><span>добавить элемент в конец</span></li>
+                <li><code>list.children.length</code><span>сколько элементов внутри</span></li>
+                <li><code>input.type = 'text'</code><span>поменять тип поля (например, показать пароль)</span></li>
+                <li><code>progress.value / progress.max</code><span>значение и максимум полоски прогресса</span></li>
+            </ul>
+
+            <h3>Формы и окна</h3>
+            <ul class="list">
+                <li><code>form.elements.name.value</code><span>что написано в поле с name="name"</span></li>
+                <li><code>.value.trim()</code><span>значение без пробелов по краям</span></li>
+                <li><code>.checked</code><span>отмечена ли галочка</span></li>
+                <li><code>form.reset()</code><span>очистить форму</span></li>
+                <li><code>dialog.showModal()</code><span>открыть окно</span></li>
+                <li><code>dialog.close()</code><span>закрыть окно</span></li>
+            </ul>
+
+            <h3>Переменные и условия</h3>
+            <ul class="list">
+                <li><code>const name = ...</code><span>переменная, которая не меняется</span></li>
+                <li><code>let count = 0</code><span>переменная, которую можно менять</span></li>
+                <li><code>count = count + 1</code><span>увеличить на 1</span></li>
+                <li><code>if (...) { } else { }</code><span>если условие верно — одно, иначе — другое</span></li>
+                <li><code>=== / !==</code><span>равно / не равно</span></li>
+                <li><code>&gt; &lt; &gt;= &lt;=</code><span>больше, меньше, больше или равно, меньше или равно</span></li>
+                <li><code>&amp;&amp;</code><span>«и»: верно, если верно оба условия</span></li>
+                <li><code>||</code><span>«или»: верно, если верно хотя бы одно</span></li>
+                <li><code>!</code><span>«не»: переворачивает условие</span></li>
+                <li><code>function showList() { }</code><span>своя функция; вызвать — showList()</span></li>
+                <li><code>return</code><span>выйти из функции (и вернуть значение)</span></li>
+            </ul>
+
+            <h3>Текст, числа, массивы, объекты</h3>
+            <ul class="list">
+                <li><code>'Привет, ' + name</code><span>склеить строки</span></li>
+                <li><code>.toLowerCase() / .toUpperCase()</code><span>все буквы маленькие / большие</span></li>
+                <li><code>.includes('кот')</code><span>есть ли кусок в строке или элемент в массиве</span></li>
+                <li><code>.length</code><span>длина строки или массива</span></li>
+                <li><code>name[0]</code><span>первая буква строки / первый элемент массива</span></li>
+                <li><code>.split(',')</code><span>разрезать строку в массив по запятой</span></li>
+                <li><code>.join(', ')</code><span>склеить массив в строку</span></li>
+                <li><code>Number('5')</code><span>превратить текст в число</span></li>
+                <li><code>Math.round(4.6)</code><span>округлить</span></li>
+                <li><code>Date.now()</code><span>текущее время числом (удобно для уникального id)</span></li>
+                <li><code>const list = []</code><span>пустой массив</span></li>
+                <li><code>list.push(x)</code><span>добавить в конец массива</span></li>
+                <li><code>list.forEach(function (item) { })</code><span>сделать что-то для каждого элемента</span></li>
+                <li><code>list.filter(function (item) { return ...; })</code><span>новый массив только с подходящими элементами</span></li>
+                <li><code>{ name: 'Аня', age: 15 }</code><span>объект: набор «ключ: значение»</span></li>
+                <li><code>user.name / data[key]</code><span>достать значение из объекта</span></li>
+            </ul>
+
+            <h3>Браузер</h3>
+            <ul class="list">
+                <li><code>localStorage.setItem('key', value)</code><span>сохранить в браузере (останется после перезагрузки)</span></li>
+                <li><code>localStorage.getItem('key')</code><span>прочитать сохранённое (null, если нет)</span></li>
+                <li><code>JSON.stringify(data)</code><span>объект → текст, чтобы сохранить в localStorage</span></li>
+                <li><code>JSON.parse(text)</code><span>текст → объект</span></li>
+                <li><code>location.href = '../profile/profile.html'</code><span>перейти на другую страницу</span></li>
+                <li><code>setTimeout(function () { }, 2000)</code><span>сделать что-то через 2 секунды</span></li>
+                <li><code>navigator.clipboard.writeText(text)</code><span>скопировать текст в буфер обмена</span></li>
+            </ul>
+        </section>
+
+        <p class="empty hide">Ничего не нашлось. Попробуй другое слово.</p>
+    </main>
+
+    <script>
+        // поиск: прячет пункты, где нет искомого текста, и пустые разделы
+        const search = document.querySelector('.search');
+        const empty = document.querySelector('.empty');
+
+        search.addEventListener('input', function () {
+            const query = search.value.trim().toLowerCase();
+            let shown = 0;
+            document.querySelectorAll('.list').forEach(function (list) {
+                let inList = 0;
+                list.querySelectorAll('li').forEach(function (item) {
+                    const fits = item.textContent.toLowerCase().includes(query);
+                    item.classList.toggle('hide', !fits);
+                    if (fits) inList = inList + 1;
+                });
+                list.classList.toggle('hide', inList === 0);
+                list.previousElementSibling.classList.toggle('hide', inList === 0);
+                shown = shown + inList;
+            });
+            document.querySelectorAll('.chapter').forEach(function (chapter) {
+                chapter.classList.toggle('hide', chapter.querySelectorAll('li:not(.hide)').length === 0);
+            });
+            empty.classList.toggle('hide', shown > 0);
+        });
+    </script>
+</body>
+</html>

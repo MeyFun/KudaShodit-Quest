@@ -184,7 +184,7 @@
             answer: { css: picCss },
             checks: [
                 ['.group-pic: круг 56×56px', function (t) {
-                    return t.px('.group-pic', 'width') === 56 && t.px('.group-pic', 'height') === 56 && t.css('.group-pic', 'border-top-left-radius') === '50%';
+                    return t.px('.group-pic', 'width') === 56 && t.px('.group-pic', 'height') === 56 && t.round('.group-pic');
                 }],
                 ['.group-pic не сжимается (min-width: 56px)', function (t) { return t.px('.group-pic', 'min-width') === 56; }],
                 ['Фото без искажений (object-fit: cover)', function (t) { return t.css('.group-pic', 'object-fit') === 'cover'; }],

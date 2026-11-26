@@ -144,7 +144,7 @@
                 }],
                 ['Аватар: круг 96×96px', function (t) {
                     return t.px('.profile-avatar', 'width') === 96 && t.px('.profile-avatar', 'height') === 96 &&
-                        t.css('.profile-avatar', 'border-top-left-radius') === '50%';
+                        t.round('.profile-avatar');
                 }],
                 ['Аватар: без искажений, рамка 3px #a0cfce', function (t) {
                     return t.css('.profile-avatar', 'object-fit') === 'cover' && Math.abs(t.px('.profile-avatar', 'border-top-width') - 3) <= 1 &&

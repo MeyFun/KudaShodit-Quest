@@ -241,7 +241,7 @@
                     return t.color('.room', 'background-color') === '#201e2a' && t.px('.room', 'border-top-left-radius') === 16;
                 }],
                 ['Постер: круг 40×40px, не сжимается', function (t) {
-                    return t.px('.room-avatar', 'width') === 40 && t.css('.room-avatar', 'border-top-left-radius') === '50%' &&
+                    return t.px('.room-avatar', 'width') === 40 && t.round('.room-avatar') &&
                         t.px('.room-avatar', 'min-width') === 40;
                 }],
                 ['Постер без искажений, рамка #a0cfce', function (t) {

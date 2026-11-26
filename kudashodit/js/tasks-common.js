@@ -205,7 +205,7 @@ QuestTasks.mainHeader = function () {
                 return t.css('.logo-icon', 'display') === 'flex' && t.css('.logo-icon', 'justify-content') === 'center';
             }],
             ['.round-btn 40×40px и круглая (50%)', function (t) {
-                return t.px('.round-btn', 'width') === 40 && t.css('.round-btn', 'border-top-left-radius') === '50%';
+                return t.px('.round-btn', 'width') === 40 && t.round('.round-btn');
             }],
             ['.round-btn: фон #26262b и без рамки', function (t) {
                 return t.color('.round-btn', 'background-color') === '#26262b' && t.css('.round-btn', 'border-top-style') === 'none';
